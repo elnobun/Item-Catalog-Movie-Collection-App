@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+	<!-- Dynamically showing different form input fields depending on chosen radio select for album cover. -->
+	<script type="text/javascript">
+		function source_select() {
+		    if (document.getElementById('local_source').checked) {
+		        document.getElementById('ifLocal').style.display = 'block';
+		       	document.getElementById('ifURL').style.display = 'none';
+		    } else if (document.getElementById('url_source').checked) {
+		        document.getElementById('ifURL').style.display = 'block';
+		       	document.getElementById('ifLocal').style.display = 'none';
+		    } else {
+		        document.getElementById('ifLocal').style.display = 'none';
+		       	document.getElementById('ifURL').style.display = 'none';
+		    }
+		}
+	</script>
+
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main collection">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>Edit {{movie.name}}
+                <figure class="creator">
+					<img src="{{ creator.picture }}">
+					<figcaption>{{ creator.name }}</figcaption>
+				</figure>
+            </h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top">
+			<form action="{{ url_for('editMovie',collection_id = collection_id, movie_id = movie.id)}}" method = "post" enctype=multipart/form-data style="display: inline;">
+				<div class="form-group" style="display: inline;">
+					<label for="director">Director:</label>
+					    <input type ="text" maxlength="250" class="form-control" name="director" value="{{movie.director}}">
+					<label for="name">Movie:</label>
+					    <input type ="text" maxlength="250" class="form-control" name="name" value="{{movie.name}}">
+					<label for="genre">Genre:</label>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="genre" id="genre1" value="Action" {% if movie.genre =='Action' %}checked{%endif%}>Action
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="genre" id="genre2" value="Adventure" {% if movie.genre =='Adventure' %}checked{%endif%}>Adventure
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="genre" id="genre3" value="Thriller" {% if movie.genre =='Thriller'%}checked{%endif%}>Thriller
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="genre" id="genre4" value="Drama" {% if movie.genre =='Drama' %}checked{% endif %}>Drama
+					  </label>
+					</div>
+					<label for="year">Year:</label>
+					<div class="input-group">
+						<input type ="text" maxlength="4" class="form-control" name="year" value="{{movie.year}}">
+					</div>
+					<label for="description">Description:</label>
+					<textarea class="form-control" maxlength="250" rows="3" name="description">{{movie.description}}</textarea>
+					<br/>
+					<div class="row">
+						<div class="col-md-8">
+							<label for="image_source">Edit Movie Cover:</label>
+							<div class="radio">
+		      					<label>
+		      						<input type="radio" onclick="javascript:source_select();" name="image_source" id="no_change" value="no_change" checked/>No Change
+								</label>
+							</div>
+		      				<div class="radio">
+		      					<label>
+		      						<input type="radio" onclick="javascript:source_select();" name="image_source" id="no_cover" value="None"/>No Movie Cover
+								</label>
+							</div>
+		      				<div class="radio">
+		      					<label>
+		      						<input type="radio" onclick="javascript:source_select();" name="image_source" id="local_source" value="local"/>Upload Image-File
+								</label>
+							</div>
+							<div id="ifLocal" style="display:none">
+								<label for=file>
+									<input type=file name=file value="{{movie.cover_image}}">
+								</label>
+							</div>
+							<div class="radio">
+		      					<label>
+		      						<input type="radio" onclick="javascript:source_select();" name="image_source" id="url_source" value="url"/>Paste in Image-URL
+								</label>
+							</div>
+							<div id="ifURL" style="display:none">
+								<label for="URL">
+									<input type ="text" maxlength="250" class="form-control" name="URL" placeholder="URL of the cover image">
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4 cover-image">
+							{% if movie.cover_source == 'url' %}
+								<p><img src="{{movie.cover_image}}"></p>
+							{% else %}
+								<p><img src="/static/uploads/{{movie.cover_image}}"></p>
+							{% endif %}
+							<p>{{movie.cover_image}}</p>
+						</div>	
+					</div>
+					<button type="submit" class="btn btn-default" id="submit" type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
+				</div>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+			</form>
+			<a href = "{{url_for('showMovies', collection_id=collection_id)}}">
+				<button class="btn btn-default delete">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Cancel</button>
+			</a>
+		</div>
+	</div>
+{% endblock %}

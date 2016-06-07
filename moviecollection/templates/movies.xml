@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<author>
+		<name></name>
+	</author>
+	<title type="text">Collection: {{collection.name}}</title>
+	{% for movie in movies %}
+	<entry>
+		<title type="text">{{movie.director}} - {{movie.name}}</title>
+		<summary type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p>ID: <movie_id>{{movie.id}}</movie_id></p>
+				<p>Director: <director>{{movie.director}}</director></p>
+				<p>Movie: <movie>{{movie.name}}</movie></p>
+				<p>Year: <year>{{movie.year}}</year></p>
+				<p>Genre: <genre>{{movie.genre}}</genre></p>
+				<p>Description: <description>{{movie.description}}</description></p>
+				<br/>
+			</div>
+		</summary>
+	</entry>
+	{% endfor %}
+</feed>

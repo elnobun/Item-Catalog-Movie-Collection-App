@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block atom_feed %}
+{% endblock %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-sm-12"></div>
+	</div>
+	<div class="row banner main collection">
+		<div class="col-sm-11 col-sm-offset-1 padding-none">
+			<h1>{{collection.name}}
+				<figure class="creator">
+					<img src="{{ creator.picture }}">
+					<figcaption>{{ creator.name }}</figcaption>
+				</figure>
+			</h1>
+		</div>
+	</div>
+	<div class = 'flash'>
+		<!-- 'with' is a block that does some automatic cleanup when the block is exited -->
+		{% with messages = get_flashed_messages() %}
+	      {% if messages %}
+	        <ul>
+	        {% for message in messages %}
+	            <li> <strong> {{ message }} </strong> </li>
+	        {% endfor %}
+	        </ul>
+	        {% endif %}
+	    {% endwith %}
+	</div>
+	<div class="row">
+		<div class="col-sm-12 text-right">
+			<p>Available Endpoints: <a href="{{url_for('collectionJSON', collection_id = collection.id)}}">JSON</a> or
+			<a href="{{url_for('collectionATOM', collection_id = collection.id)}}">Atom</a></p>
+		</div>
+	</div>
+	{% if movies !=[] %}
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<h2>Movies</h2>
+				{% for a in movies %}
+					<div class="row movie">
+						<div class="row">
+							<div class="col-sm-3 cover-image">
+								{% if a.cover_source == 'url' %}
+									<p><img src="{{a.cover_image}}"></p>
+								{% else %}
+									<p><img src="/static/uploads/{{a.cover_image}}"></p>
+								{% endif %}
+							</div>
+							<div class="col-sm-9">
+								<h3>{{a.artist}} - {{a.name}}</h3>
+								<p class="movie-year">{{a.genre}} [{{a.year}}]</p>
+								<p>{{a.description}}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 text-right">
+								<a href="{{url_for('movieJSON', collection_id = collection.id, movie_id=a.id)}}">JSON</a> or
+								<a href="{{url_for('movieATOM', collection_id = collection.id, movie_id=a.id)}}">Atom</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endif %}
+{% endblock %}
