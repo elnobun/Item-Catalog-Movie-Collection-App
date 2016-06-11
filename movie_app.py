@@ -12,7 +12,7 @@ Before running this app, ensure that the database is setup by running
 
 app.start_session()
 app.secret_key = uuid.uuid4().hex  # 'secret_key'
-app.debug = False
+app.debug = True
 # If debug is enabled, the server will reload itself each time it notices a code change.
 # it is advisable to turn debug off in production.
 # The debugging console allows code to be executed directly on the server.
