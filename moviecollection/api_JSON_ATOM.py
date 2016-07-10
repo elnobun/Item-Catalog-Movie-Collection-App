@@ -18,8 +18,7 @@ def collectionJSON(collection_id):
     """ Returns all movies of a distinct collection in JSON format.
     :param collection_id:
     """
-    movies = app.Movie().filter_by(
-        collection_id=collection_id).all()
+    movies = app.Movie().filter_by(collection_id=collection_id).all()
     return jsonify(Movies=[a.serialize for a in movies])
 
 
@@ -31,8 +30,9 @@ def movieJSON(collection_id, movie_id):
     Args:
         movie_id:
     """
+    collection = app.Collection().filter_by(id=collection_id).one()
     movie = app.Movie().filter_by(id=movie_id).one()
-    return jsonify(movie=movie.serialize)
+    return jsonify(movie=movie.serialize, collection=collection.serialize)
 
 
 ##############################################################################
@@ -59,5 +59,6 @@ def collectionATOM(collection_id):
 def movieATOM(collection_id, movie_id):
     """ Returns a distinct album in Atom format """
 
+    collection = app.Collection().filter_by(id=collection_id).one()
     movie = app.Movie().filter_by(id=movie_id).one()
-    return render_template('movie.xml', movie=movie)
+    return render_template('movie.xml', movie=movie, collection=collection)
