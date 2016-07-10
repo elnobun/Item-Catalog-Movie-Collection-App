@@ -1,6 +1,6 @@
 from flask import jsonify, render_template
 from moviecollection import app
-from moviecollection.database_setup import Collection, Movie, User
+
 
 
 ##############################################################################
@@ -23,7 +23,7 @@ def collectionJSON(collection_id):
 
 
 @app.route('/collection/<int:collection_id>/movie/<int:movie_id>/JSON')
-def movieJSON(cls, movie_id):
+def movieJSON(collection_id, movie_id):
     """ Returns a distinct album in JSON format
     :param collection_id:
 
@@ -56,7 +56,7 @@ def collectionATOM(collection_id):
 
 
 @app.route('/collection/<int:collection_id>/movie/<int:movie_id>/atom')
-def movieATOM(cls, movie_id):
+def movieATOM(collection_id, movie_id):
     """ Returns a distinct album in Atom format """
 
     collection = app.Collection().filter_by(id=collection_id).one()
