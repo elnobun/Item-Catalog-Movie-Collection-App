@@ -22,8 +22,6 @@ def start_session():
 
     """
     app.session = db_setup.get_database_session()
-
-
 # Access start_session method using a reference to app.
 app.start_session = start_session
 
@@ -35,7 +33,6 @@ def user():
     """Return a new query object for database User class."""
     return app.session.query(User)
 
-
 app.User = user
 
 
@@ -43,13 +40,11 @@ def collection():
     """Return a new query object for database Collection class."""
     return app.session.query(Collection)
 
-
 app.Collection = collection
 
 
 def movie():
     """Return a new query object for database Movie class."""
     return app.session.query(Movie)
-
 
 app.Movie = movie
