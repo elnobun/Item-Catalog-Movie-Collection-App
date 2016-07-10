@@ -8,8 +8,8 @@ app = Flask(__name__)
 # CSRF: for preventing cross-site request forgery
 ##############################################################################
 
-# import moviecollection.views
-# import moviecollection.api_JSON_ATOM
+import moviecollection.views
+import moviecollection.api_JSON_ATOM
 # import moviecollection.login
 
 
