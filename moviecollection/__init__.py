@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 import moviecollection.views
 import moviecollection.api_JSON_ATOM
-# import moviecollection.login
+import moviecollection.login
 
 
 def start_session():
