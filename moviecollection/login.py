@@ -1,5 +1,4 @@
 import requests
-import uuid
 import string
 import random
 import json
@@ -64,10 +63,11 @@ def getUserID(email):
             nothing.
     """
 
-    try:
-        user = app.session.query(User).filter_by(email=email).one()
+    user = app.session.query(User).filter_by(email=email).one()
+
+    if user:
         return user.id
-    except:
+    else:
         return None
 
 ##############################################################################
@@ -248,7 +248,7 @@ def fbconnect():
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
 
-        # Use token to get user info from API
+    # Use token to get user info from API
     # not used: userinfo_url = "https://graph.facebook.com/v2.2/me"
 
     # The long-lived token includes an expires-field that indicates how long
