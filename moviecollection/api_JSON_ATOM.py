@@ -56,7 +56,7 @@ def collectionATOM(collection_id):
 
 
 @app.route('/collection/<int:collection_id>/movie/<int:movie_id>/atom')
-def movieATOM(collection_id, movie_id):
+def movieATOM(cls, collection_id, movie_id):
     """ Returns a distinct album in Atom format """
 
     collection = app.Collection().filter_by(id=collection_id).one()
