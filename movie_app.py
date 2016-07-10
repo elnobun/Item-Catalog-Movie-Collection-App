@@ -1,12 +1,9 @@
 from moviecollection import app
 import uuid
 
-"""
-Item Catalog project main app.
-Run this file as 'python catalog_app.py' to initialize the server.
-Before running this app, ensure that the database is setup by running
-'database_setup.py'.
-"""
+# Item Catalog project main app.
+# Run this file as 'python catalog_app.py' to initialize the server.
+# Before running this app, ensure that the database is setup by running 'database_setup.py'.
 
 app.start_session()
 app.secret_key = uuid.uuid4().hex  # 'secret_key'
