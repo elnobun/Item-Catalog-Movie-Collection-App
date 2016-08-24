@@ -15,12 +15,12 @@
 			<h1>Login with OAuth 2.0</h1>
 		</div>
 	</div>
-    <div class="row">
-		<div class="col-md-6 col-md-offset-1 padding-top">
+    <div class="row login_entry">
+        <div class="col-md-6 col-md-offset-3 padding-top login_border">
 			<!-- Google Plus sign in -->
 			<!-- 1) When the User clicks the sign-in button, the authorization request is sent to Google's OAuth servers.
 			     2) The OAuth dialog is triggered for the user. -->
-			<button class="btn btn-default">
+            <div class="btn btn-default">
                 <span class="glyphicon glyphicon-glass"></span>
                 Login in with Google
                     <span class="g-signin"
@@ -33,10 +33,11 @@
                         data-callback="signInCallback"
                         data-approvalprompt="force">
                     </span>
-            </button>
+            </div>
             <div id="result"></div>
         </div>
     </div>
+
 
     <script>
 		// 3) access_token, id_token, and a one-time code are returned from the Google API Server when OAuth dialog
@@ -69,7 +70,7 @@
                     // after about four seconds
 					success: function(result) {
 						if (result) {
-							$('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
+                            $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...');
 							setTimeout(function() {
 								window.location.href = "/collection";
 							}, 4000);
@@ -127,7 +128,7 @@
 			      	success: function(result) {
 				        // Handle or verify the server response if necessary.
 				        if (result) {
-				          	$('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                            $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...');
 				         	setTimeout(function() {
 				          		window.location.href = "/collection";
 				         	}, 4000);
@@ -150,16 +151,17 @@
 	  	wants to request.
 	  	- When the button is clicked, the method sendTokenToServer() is invoked as well.
 	-->
-<div class="row">
-    <div class="col-md-6 col-md-offset-1 padding-top">
-        <button class="btn btn-default">
-            <span class="glyphicon glyphicon-glass" area-hidden="true"></span>
-            Login in with Facebook
-            <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
-                <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
-            </fb:login-button>
-        </button>
+
+    <div class="row login_entry">
+        <div class="col-md-6 col-md-offset-3 padding-top login_border">
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-glass" area-hidden="true"></span>
+                Login in with Facebook
+                <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+                    <a href='javascript:sendTokenToServer()'>Facebook Login</a>
+                </fb:login-button>
+            </button>
+        </div>
     </div>
-</div>
 
 {% endblock %}
