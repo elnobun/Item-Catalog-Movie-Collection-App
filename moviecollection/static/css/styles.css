@@ -200,3 +200,14 @@ p {
 	text-align: center;
 
 }
+
+.login_entry {
+	text-align: center;
+}
+
+.login_border {
+	border: #e5ebef 1px solid;
+	margin-top: 20px;
+	padding-bottom: 30px;
+}
+
