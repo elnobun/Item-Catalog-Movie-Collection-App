@@ -19,6 +19,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+
 ##############################################################################
 # User Helper funtion:
 ###############################################################################
@@ -100,13 +101,13 @@ app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
 # Render image upload
 ###############################################################################
 def file_extension_allowed(filename):
-    ''' Checks file for allowed extensions.
+    """Checks file for allowed extensions.
 
     Checks if file extension is in the predefined list of allowed extensions to
     make sure that users are not able to upload HTML files that would cause
     Cross-Site Scripting problems.
     :param filename:
-    '''
+    """
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
@@ -148,11 +149,10 @@ def image_source_process(image_source):
 ##############################################################################
 # Render template - These app.routes respond with web pages.
 ###############################################################################
-## Collection
 @app.route('/')
 @app.route('/collection/')
 def showCollections():
-    "Shows all movie collection in the database"
+    """"Shows all movie collection in the database"""
 
     collections = app.Collection().order_by(asc(Collection.name))
     if 'username' not in login_session:
@@ -172,15 +172,12 @@ def newCollection():
         on POST: Redirect to main page after collection has been created.
         Login page when user is not signed in.
     """
-    #if 'username' not in login_session:
-    #    return redirect('/login')
     if request.method == 'POST':
         newCollection = Collection(name=request.form['name'], user_id=login_session['user_id'])
         app.session.add(newCollection)
         flash('New Collection %s Successfully Created' % newCollection.name)
         app.session.commit()
         return redirect(url_for('showCollections'))
-
 
     else:
         return render_template('newCollection.html')
@@ -206,7 +203,8 @@ def editCollection(collection_id):
     if editedCollection.user_id != login_session['user_id']:
         return ("<script>function myFunction() {alert('You are not authorized "
                 "to edit this collection. Please create your own collection in"
-                " order to edit.');}</script><body onload='myFunction()'>")
+                " order to edit.'); window.location = '/collection/'}"
+                "</script><body onload='myFunction()'>")
     if request.method == 'POST':
         if request.form['name']:
             editedCollection.name = request.form['name']
@@ -237,7 +235,8 @@ def deleteCollection(collection_id):
     if collectionToDelete.user_id != login_session['user_id']:
         return ("<script>function myFunction() {alert('You are not authorized "
                 "to delete this collection. Plaease create your own collection"
-                " in order to delete.');}</script><body onload='myFunction()'"
+                " in order to delete.'); window.location = '/collection/'}"
+                "</script><body onload='myFunction()'"
                 ">")
     if request.method == 'POST':
         app.session.delete(collectionToDelete)
@@ -249,7 +248,6 @@ def deleteCollection(collection_id):
                                collectionToDelete=collectionToDelete, creator=creator)
 
 
-### Movie ####################################
 @app.route('/collection/<int:collection_id>/')
 @app.route('/collection/<int:collection_id>/movie/')
 @login_required
@@ -262,8 +260,7 @@ def showMovies(collection_id):
     creator = getUserInfo(collection.user_id)
     movies = app.session.query(Movie).filter_by(
         collection_id=collection_id).all()
-    if ('username' not in login_session or
-                creator.id != login_session['user_id']):
+    if 'username' not in login_session or creator.id != login_session['user_id']:
         return render_template('publicMovies.html', movies=movies,
                                collection=collection, creator=creator)
     # The logged in user is the creator of the collection.
@@ -285,8 +282,6 @@ def newMovie(collection_id):
             Login page when user is not signed in.
             Alert when user is trying to create an album he is not authorized to.
         """
-#    if 'username' not in login_session:
-#        return redirect('/login')
     collection = app.session.query(Collection).filter_by(id=collection_id).one()
     creator = getUserInfo(collection.user_id)
     if request.method == 'POST':
@@ -317,7 +312,7 @@ def editMovie(collection_id, movie_id):
     Args:
         movie_id:
         collection_id: An integer identifying a distinct collection.
-        album_id: An integer identifying a distinct album.
+        movie_id: An integer identifying a distinct album.
 
     Returns:
         on GET: Page to edit an album.
@@ -326,15 +321,15 @@ def editMovie(collection_id, movie_id):
         Alert when user is trying to edit an album he is not authorized to.
 
     """
-#    if 'username' not in login_session:
-#        return redirect('/login')
+
     editedMovie = app.session.query(Movie).filter_by(id=movie_id).one()
     collection = app.session.query(Collection).filter_by(id=collection_id).one()
     creator = getUserInfo(collection.user_id)
     if login_session['user_id'] != collection.user_id:
         return ("<script>function myFunction() {alert('You are not authorized "
                 "to edit movies to this collection. Please create your own"
-                " collection in order to edit albums.');}</script><body "
+                " collection in order to edit albums.'); window.location = '/collection/}"
+                "</script><body "
                 "onload='myFunction()'>")
     if request.method == 'POST':
         if request.form['name']:
@@ -382,15 +377,15 @@ def deleteMovie(collection_id, movie_id):
         Alert when user is trying to delete an album he is not authorized to.
 
     """
-#    if 'username' not in login_session:
-#        return redirect('/login')
+
     collection = app.session.query(Collection).filter_by(id=collection_id).one()
     movieToDelete = app.session.query(Movie).filter_by(id=movie_id).one()
     creator = getUserInfo(collection.user_id)
     if login_session['user_id'] != collection.user_id:
         return ("<script>function myFunction() {alert('You are not authorized "
                 "to delete movies to this collection. Please create your "
-                "own collection in order to delete albums.');}</script><body "
+                "own collection in order to delete albums.'); window.location = '/collection/}"
+                "</script><body "
                 "onload='myFunction()'>")
     if request.method == 'POST':
         if movieToDelete.cover_source == 'local':
