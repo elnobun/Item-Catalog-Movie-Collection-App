@@ -32,13 +32,13 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-1 padding-top">
-			<form action="#" method = "post" enctype=multipart/form-data style="display: inline;">
+            <form data-toggle="validator" action="#" method="post" enctype=multipart/form-data style="display: inline;">
 				<div class="form-group" style="display: inline;">
 					<label for="director">Director:</label>
 					<input type ="text" maxlength="250" class="form-control" name="director" placeholder="Name of the Director">
 					<label for="name">Movie:</label>
 					<input type ="text" maxlength="250" class="form-control" name="name" placeholder="Name of the Movie">
-					<label for="genre">Genre:</label>
+                    <label for="genre" class="has-warning">Genre:</label>
 					<div class="radio">
 					  <label>
 					    <input type="radio" name="genre" id="genre1" value="Action">Action
@@ -69,13 +69,15 @@
       				<label for="image_source">Add Movie Cover:</label>
       				<div class="radio">
       					<label>
-      						<input type="radio" onclick="javascript:source_select();" name="image_source" id="no_cover" value="None" checked/>No Movie Cover
+                            <input type="radio" onclick="source_select();" name="image_source" id="no_cover"
+                                   value="None" checked/>No Movie Cover
 						</label>
 					</div>
 
       				<div class="radio">
       					<label>
-      						<input type="radio" onclick="javascript:source_select();" name="image_source" id="local_source" value="local"/>Upload Image-File
+                            <input type="radio" onclick="source_select();" name="image_source" id="local_source"
+                                   value="local"/>Upload Image-File
 						</label>
 					</div>
 					<div id="ifLocal" style="display:none">
@@ -86,7 +88,8 @@
 
 					<div class="radio">
       					<label>
-      						<input type="radio" onclick="javascript:source_select();" name="image_source" id="url_source" value="url"/>Paste in Image-URL
+                            <input type="radio" onclick="source_select();" name="image_source" id="url_source"
+                                   value="url"/>Paste in Image-URL
 						</label>
 					</div>
 					<div id="ifURL" style="display:none">
