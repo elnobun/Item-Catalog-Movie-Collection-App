@@ -34,11 +34,13 @@
 		<div class="col-md-6 col-md-offset-1 padding-top">
             <form data-toggle="validator" action="#" method="post" enctype=multipart/form-data style="display: inline;">
 				<div class="form-group" style="display: inline;">
-					<label for="director">Director:</label>
-					<input type ="text" maxlength="250" class="form-control" name="director" placeholder="Name of the Director">
-					<label for="name">Movie:</label>
-					<input type ="text" maxlength="250" class="form-control" name="name" placeholder="Name of the Movie">
-                    <label for="genre" class="has-warning">Genre:</label>
+                    <label for="director" class="control-label">Director:</label>
+                    <input type="text" maxlength="250" class="form-control" name="director"
+                           placeholder="Name of the Director" required>
+                    <label for="name" class="control-label">Movie:</label>
+                    <input type="text" maxlength="250" class="form-control" name="name" placeholder="Name of the Movie"
+                           required>
+                    <label for="genre" class="control-label">Genre:</label>
 					<div class="radio">
 					  <label>
 					    <input type="radio" name="genre" id="genre1" value="Action">Action
@@ -59,14 +61,15 @@
 					    <input type="radio" name="genre" id="genre4" value="Drama">Drama
 					  </label>
 					</div>
-					<label for="year">Year:</label>
+                    <label for="year" class="control-label">Year:</label>
 					<div class="input-group">
-						<input type ="text" class="form-control" maxlength="4" name="year" placeholder="Year">
+                        <input type="text" class="form-control" maxlength="4" name="year" placeholder="Year" required>
 					</div>
-					<label for="description">Description:</label>
-					<textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Description of the Movie"></textarea>
-      				
-      				<label for="image_source">Add Movie Cover:</label>
+                    <label for="description" class="control-label">Description:</label>
+                    <textarea class="form-control" maxlength="250" rows="3" name="description"
+                              placeholder="Description of the Movie" required></textarea>
+
+                    <label for="image_source" class="control-label">Add Movie Cover:</label>
       				<div class="radio">
       					<label>
                             <input type="radio" onclick="source_select();" name="image_source" id="no_cover"
