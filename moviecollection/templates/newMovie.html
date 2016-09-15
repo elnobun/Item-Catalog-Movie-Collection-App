@@ -2,20 +2,6 @@
 {% block content %}
 {% include "header.html" %}
 	<!-- Dynamically showing different form input fields depending on chosen radio select for album cover. -->
-	<script type="text/javascript">
-		function source_select() {
-		    if (document.getElementById('local_source').checked) {
-		        document.getElementById('ifLocal').style.display = 'block';
-		       	document.getElementById('ifURL').style.display = 'none';
-		    } else if (document.getElementById('url_source').checked) {
-		        document.getElementById('ifURL').style.display = 'block';
-		       	document.getElementById('ifLocal').style.display = 'none';
-		    } else if (document.getElementById('no_cover').checked) {
-		        document.getElementById('ifLocal').style.display = 'none';
-		       	document.getElementById('ifURL').style.display = 'none';
-		    }
-		}
-	</script>
 
 	<div class="row divider green">
 		<div class="col-md-12"></div>
