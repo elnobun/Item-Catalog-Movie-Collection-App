@@ -25,6 +25,9 @@
                 Login in with Google
                     <span class="g-signin"
                           area-hidden="true"
+                          data-width="300"
+                          data-height="100"
+                          data-longtitle="true"
                           data-scope="openid email"
                           data-clientid="1036719779245-v5oqjkgk6no44qjtq017du6egq547ub7.apps.googleusercontent.com"
                           data-redirecturi="postmessage"
@@ -77,7 +80,7 @@
 						} else if (authResult['error']) {
 							console.log('There was an error: ' + authResult['error']);
 						} else {
-							$('#result').html('Failed to make a server side call. Check your configuration and console.');
+                            $('#result').html('Failedto make a server side call. Check your configuration and console.');
 						}
 					}
 
