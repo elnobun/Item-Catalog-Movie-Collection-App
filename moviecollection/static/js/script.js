@@ -15,3 +15,19 @@ function source_select() {
         document.getElementById('ifURL').style.display = 'none';
     }
 }
+
+//Form validation
+function validateForm() {
+    var x = document.forms["frmContact"]["collection"].value;
+
+    if (x == null || x == "") {
+        document.getElementById("fName").className = document.getElementById("fName").className + " error";
+        document.getElementById("errorMessage").style.color = "indianred";
+        document.getElementById("errorMessage").innerHTML = "Please input a collection name!";
+        return false;
+    } else {
+        document.getElementById("fName").className = document.getElementById("fName").className.replace(" error", "");
+        document.getElementById("errormessage").innerHTML = "";
+        return true;
+    }
+}
