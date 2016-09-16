@@ -173,7 +173,7 @@ def newCollection():
         Login page when user is not signed in.
     """
     if request.method == 'POST':
-        newCollection = Collection(name=request.form['name'], user_id=login_session['user_id'])
+        newCollection = Collection(name=request.form['collection'], user_id=login_session['user_id'])
         app.session.add(newCollection)
         flash('New Collection %s Successfully Created' % newCollection.name)
         app.session.commit()
