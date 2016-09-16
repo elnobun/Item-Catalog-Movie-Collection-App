@@ -18,13 +18,14 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-1 padding-top">
-            <form data-toggle="validator" action="#" method="post" enctype=multipart/form-data style="display: inline;">
+            <form name="frmContact" action="#" method="post" enctype=multipart/form-data style="display: inline;">
 				<div class="form-group" style="display: inline;">
                     <label for="director" class="control-label">Director:</label>
-                    <input type="text" maxlength="250" class="form-control" name="director"
+                    <input type="text" maxlength="250" class="form-control" name="director" id="director"
                            placeholder="Name of the Director" required>
                     <label for="name" class="control-label">Movie:</label>
-                    <input type="text" maxlength="250" class="form-control" name="name" placeholder="Name of the Movie"
+                    <input type="text" maxlength="250" class="form-control" name="movie" id="movie"
+                           placeholder="Name of the Movie"
                            required>
                     <label for="genre" class="control-label">Genre:</label>
 					<div class="radio">
@@ -85,8 +86,8 @@
 						<label for="URL">
 							<input type ="text" maxlength="250" class="form-control" name="URL" placeholder="URL of the cover image">
 						</label>
-					</div>				
-
+					</div>
+                    <span id="errorMessage"></span>
 					<button class="btn btn-default" id="submit" type="submit">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Create</button>
 				</div>
